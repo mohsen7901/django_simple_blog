@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Serenity{% endblock %}
+{% block content %}
+
+<!-- ======= Hero Section ======= -->
+<section id="hero">
+  <div class="hero-container" data-aos="fade-up">
+    <h1>Welcome to Serenity</h1>
+    <h2>This is a website about peace and serenity. I hope you enjoy it!</h2>
+    <a href="{% url 'website:about' %}" class="btn-get-started scrollto">Get Started</a>
+  </div>
+</section><!-- End Hero -->
+
+<main id="main">
+
+  <!-- ======= About Section ======= -->
+  <section id="about" class="about">
+    <div class="container">
+
+      <br>
+
+      <div class="row">
+
+        <div class="col-lg-6 video-box align-self-baseline position-relative">
+          <img src="{% static 'img/skills-img.jpg' %}" class="img-fluid" alt="skills-img.jpg">
+          
+        </div>
+
+        <div class="col-lg-6 pt-3 pt-lg-0 content">
+          <h3>Welcome to Serenity</h3>
+          <p>
+            This is a website about peace and serenity. I hope you enjoy it!
+            Have fun!
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+  </section><!-- End About Section -->
+
+  <!-- ======= Cta Section ======= -->
+  <section id="cta" class="cta">
+    <div class="container" data-aos="fade-in">
+
+      <div class="text-center">
+        <h3>Call To Action</h3>
+        <a class="cta-btn" href="{% url 'website:contact' %}">Call To Action</a>
+      </div>
+
+    </div>
+  </section><!-- End Cta Section -->
+
+</main><!-- End #main -->
+
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends 'accounts/base.html' %}
+{% load static %}
+{% block title %}Log In{% endblock %}
+{% block content %}
+
+<form class="form-signin" method="post" action="{% url 'accounts:login' %}">
+    {% csrf_token %}
+    <a href="/"><img class="mb-4" src="{% static 'img/bootstrap-solid.svg' %}" alt="" width="72" height="72"></a>
+    <h1 class="h3 mb-3 font-weight-normal">Sign in to Serenity</h1>
+    <label for="inputUsername" class="sr-only">Username/Email</label>
+    <input type="text" name="username" id="inputUsername" class="form-control" placeholder="Username/Email" required autofocus>
+    <label for="inputPassword" class="sr-only">Password</label>
+    <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
+    <!-- <div class="checkbox mb-3">
+    <label>
+        <input type="checkbox" value="remember-me"> Remember me
+    </label>
+    </div> -->
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+    <a href="{% url 'accounts:password_reset' %}"><i>Forgot Password?</i></a>
+
+    <p class="mt-5 mb-3 ">Not a user? <a href="/accounts/signup">
+    Sign up
+    </a></p>
+    <p class="mt-5 mb-3 text-muted">&copy; Mohsen Fathali - 2024</p>
+</form>
+    
+{% endblock %}

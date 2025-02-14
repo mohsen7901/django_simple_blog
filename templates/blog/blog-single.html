@@ -1,0 +1,241 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load blog_tags %}
+{% block title %}Blog - Single Post{% endblock %}
+{% load humanize %}
+{% block content %}
+
+<main id="main">
+
+  <!-- ======= Breadcrumbs ======= -->
+  <section id="breadcrumbs" class="breadcrumbs">
+    <div class="breadcrumb-hero">
+      <div class="container">
+        <div class="breadcrumb-hero">
+          <h2>Blog</h2>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <ol>
+        <li><a href="{% url 'website:index' %}">Home</a></li>
+        <li><a href="{% url 'blog:index' %}">Blog</a></li>
+        <li>{{post.title}}</li>
+      </ol>
+    </div>
+  </section><!-- End Breadcrumbs -->
+
+  <!-- ======= Blog Single Section ======= -->
+  <section id="blog" class="blog">
+    <div class="container" data-aos="fade-up">
+
+      <div class="row">
+
+        <div class="col-lg-8 entries">
+
+          <article class="entry entry-single">
+
+            <div class="entry-img">
+              <img src="{{post.image.url}}" alt="" class="img-fluid">
+            </div>
+
+            <h2 class="entry-title">
+              <a href="">{{post.title}}</a>
+            </h2>
+
+            <div class="entry-meta">
+              <ul>
+                <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="{% url 'blog:author' author=post.author.username %}">{{post.author.get_full_name}}</a></li>
+                <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="#"><time
+                      datetime="2020-01-01">{{post.published_date|naturalday}}</time></a></li>
+                <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a href="#">{% comments_count post.id %}
+                    Comments</a></li>
+                <li class="d-flex align-items-center">{{post.counted_views}} views</li>
+              </ul>
+            </div>
+
+            <div class="entry-content">
+              <p>
+                {{post.content|safe}}
+              </p>
+
+              <!-- <p>
+                Sit repellat hic cupiditate hic ut nemo. Quis nihil sunt non reiciendis. Sequi in accusamus harum vel
+                aspernatur. Excepturi numquam nihil cumque odio. Et voluptate cupiditate.
+              </p>
+
+              <blockquote>
+                <p>
+                  Et vero doloremque tempore voluptatem ratione vel aut. Deleniti sunt animi aut. Aut eos aliquam
+                  doloribus minus autem quos.
+                </p>
+              </blockquote>
+
+              <p>
+                Sed quo laboriosam qui architecto. Occaecati repellendus omnis dicta inventore tempore provident
+                voluptas mollitia aliquid. Id repellendus quia. Asperiores nihil magni dicta est suscipit perspiciatis.
+                Voluptate ex rerum assumenda dolores nihil quaerat.
+                Dolor porro tempora et quibusdam voluptas. Beatae aut at ad qui tempore corrupti velit quisquam rerum.
+                Omnis dolorum exercitationem harum qui qui blanditiis neque.
+                Iusto autem itaque. Repudiandae hic quae aspernatur ea neque qui. Architecto voluptatem magni. Vel
+                magnam quod et tempora deleniti error rerum nihil tempora.
+              </p>
+
+              <h3>Et quae iure vel ut odit alias.</h3>
+              <p>
+                Officiis animi maxime nulla quo et harum eum quis a. Sit hic in qui quos fugit ut rerum atque. Optio
+                provident dolores atque voluptatem rem excepturi molestiae qui. Voluptatem laborum omnis ullam quibusdam
+                perspiciatis nulla nostrum. Voluptatum est libero eum nesciunt aliquid qui.
+                Quia et suscipit non sequi. Maxime sed odit. Beatae nesciunt nesciunt accusamus quia aut ratione
+                aspernatur dolor. Sint harum eveniet dicta exercitationem minima. Exercitationem omnis asperiores natus
+                aperiam dolor consequatur id ex sed. Quibusdam rerum dolores sint consequatur quidem ea.
+                Beatae minima sunt libero soluta sapiente in rem assumenda. Et qui odit voluptatem. Cum quibusdam
+                voluptatem voluptatem accusamus mollitia aut atque aut.
+              </p>
+              <img src="{% static 'img/blog/blog-inside-post.jpg' %}" class="img-fluid" alt="">
+
+              <h3>Ut repellat blanditiis est dolore sunt dolorum quae.</h3>
+              <p>
+                Rerum ea est assumenda pariatur quasi et quam. Facilis nam porro amet nostrum. In assumenda quia quae a
+                id praesentium. Quos deleniti libero sed occaecati aut porro autem. Consectetur sed excepturi sint non
+                placeat quia repellat incidunt labore. Autem facilis hic dolorum dolores vel.
+                Consectetur quasi id et optio praesentium aut asperiores eaque aut. Explicabo omnis quibusdam esse. Ex
+                libero illum iusto totam et ut aut blanditiis. Veritatis numquam ut illum ut a quam vitae.
+              </p>
+              <p>
+                Alias quia non aliquid. Eos et ea velit. Voluptatem maxime enim omnis ipsa voluptas incidunt. Nulla sit
+                eaque mollitia nisi asperiores est veniam.
+              </p> -->
+
+            </div>
+
+            <div class="entry-footer">
+              {% for cat in cats %}
+              <i class="bi bi-folder"></i>
+              <ul class="cats">
+                <li><a href="{% url 'blog:category' cat=cat %}">{{cat}}</a></li>
+              </ul>
+              {% endfor %}
+              <i class="bi bi-tags"></i>
+              {% for tag in tags %}
+              <ul class="tags">
+                <li><a href="{% url 'blog:tag' tag=tag %}">{{tag}}</a></li>
+              </ul>
+              {% endfor %}
+              <br>
+              <ul class="cats">
+              {% if prev_post_id %}
+                <li><a href="{% url 'blog:single' pid=prev_post_id %}">Previous Post</a></li>
+              {% endif %}
+              </ul>
+              <ul class="cats">
+              {% if next_post_id %}
+                <li><a href="{% url 'blog:single' pid=next_post_id %}">Next Post</a></li>
+              {% endif %}
+              </ul>
+            </div>
+
+          </article><!-- End blog entry -->
+
+          <div class="blog-author d-flex align-items-center">
+            <img src="{% static 'img/blog/avatar_young_boy.jpg' %}" class="rounded-circle float-left" alt="">
+            <div>
+              <h4>{{post.author.get_full_name}}</h4>
+              <div class="social-links">
+                <a href="https://twitters.com/#"><i class="bi bi-twitter"></i></a>
+                <a href="https://facebook.com/#"><i class="bi bi-facebook"></i></a>
+                <a href="https://instagram.com/#"><i class="biu bi-instagram"></i></a>
+              </div>
+              <p>
+                Designed by Mohsen Fathali.
+              </p>
+            </div>
+          </div><!-- End blog author bio -->
+
+          <div class="blog-comments">
+
+            <h4 class="comments-count">{{comments.count}} Comments</h4>
+            {% for comment in comments %}
+            <div id="comment-1" class="comment">
+              <div class="d-flex">
+                <div class="comment-img"><img src="{% static 'img/blog/general_user_avatar.png' %}" alt=""></div>
+                <div>
+                  <h5><a href="">{{comment.name}}</a>
+                  </h5>
+                  <time datetime="2020-01-01">{{comment.updated_date}}</time>
+                  <p>
+                    {{comment.text|safe}}
+                  </p>
+                </div>
+              </div>
+            </div><!-- End comment #1 -->
+            {% endfor %}
+            
+
+            <div class="reply-form">
+              <h4>Leave a Comment</h4>
+              <p>Your email address will not be published. Required fields are marked * </p>
+              <form action="{% url 'blog:single' pid=post.id %}" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="post" value="{{post.id}}">
+                {% if request.user.is_authenticated %}
+                  {% if request.user.first_name %}
+                    <input name="name" type="hidden" value="{{request.user.first_name}}">
+                  {% endif %}
+                  {% if request.user.email %}
+                    <input name="email" type="hidden" value="{{request.user.email}}">
+                  {% endif %}
+                {% else %}
+                <div class="row">
+                  <div class="col-md-6 form-group">
+                    <input name="name" type="text" class="form-control" placeholder="Your Name*" required>
+                  </div>
+                  <div class="col-md-6 form-group">
+                    <input name="email" type="email" class="form-control" placeholder="Your Email*" required>
+                  </div>
+                </div>
+                {% endif %}
+                <div class="row">
+                  <div class="col form-group">
+                    <textarea name="text" class="form-control" placeholder="Your Comment*" required></textarea>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col form-group">
+                    {{form.captcha}}
+                  </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Post Comment</button>
+
+              </form>
+
+            </div>
+
+          </div><!-- End blog comments -->
+
+        </div><!-- End blog entries list -->
+
+        <div class="col-lg-4">
+
+          <div class="sidebar">
+
+            {% include 'blog/blog-search.html' %}
+
+            {% post_categories %}
+
+            {% recent_posts 5 %}
+
+            {% post_tags %}
+
+          </div><!-- End sidebar -->
+
+        </div><!-- End blog sidebar -->
+
+      </div>
+
+    </div>
+  </section><!-- End Blog Single Section -->
+
+</main><!-- End #main -->
+
+{% endblock %}

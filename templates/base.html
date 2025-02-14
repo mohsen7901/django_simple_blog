@@ -1,0 +1,248 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>{% block title %}{% endblock %}</title>
+  <meta content="This is a website for serenity." name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="{% static 'img/favicon.png' %}" rel="icon">
+  <link href="{% static 'img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+    rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{% static 'vendor/aos/aos.css' %}" rel="stylesheet">
+  <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static 'vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+  <link href="{% static 'vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+  <link href="{% static 'vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="{% static 'css/style.css' %}" rel="stylesheet">
+
+
+  <!-- =======================================================
+  * Template Name: Serenity
+  * Template URL: https://bootstrapmade.com/serenity-bootstrap-corporate-template/
+  * Updated: Mar 17 2024 with Bootstrap v5.3.3
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top d-flex align-items-center">
+    <div class="container d-flex align-items-center justify-content-between">
+
+      <div class="logo">
+        <h1 class="text-light"><a href="{% url 'website:index' %}">Serenity</a></h1>
+        <!-- Uncomment below if you prefer to use an image logo -->
+        <!-- <a href="{% url 'website:index' %}"><img src="{% static 'img/logo.png' %}" alt="" class="img-fluid"></a> -->
+      </div>
+
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a href="{% url 'website:index' %}">Home</a></li>
+          <li><a href="{% url 'website:about' %}">About</a></li>
+          <li><a href="{% url 'blog:index' %}">Blog</a></li>
+          <li><a href="{% url 'website:contact' %}">Contact</a></li>
+          {% if not request.user.is_authenticated %}
+          <li><a class="getstarted" href="{% url 'accounts:login' %}">Sign In</a></li>
+          <li><a class="getstarted" href="{% url 'accounts:signup' %}">Sign Up</a></li>
+          {% else %}
+          <!--
+          To be imlemented...
+          Add link on username to be refered to profile page of user
+          -->
+          <li><a href=".">{{request.user.username}}</a></li>
+          <li><a class="getstarted" href="{% url 'accounts:logout' %}">Sign Out</a></li>
+          {% endif %}
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+
+    </div>
+  </header><!-- End Header -->
+
+  <!-- Prevent user from resubmit a form -->
+  <script>
+    if ( window.history.replaceState ) {
+        window.history.replaceState( null, null, window.location.href );
+    }
+  </script>
+
+  <!-- Showing messages via modals -->
+  {% if messages %}
+  <div id="messageModal" class="modal" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                  {% for message in messages %}
+                    <p> {{ message|safe }}</p>
+                  {% endfor %}
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-info" data-bs-dismiss="modal">OK!</button>
+              </div>
+          </div>
+      </div>
+  </div>
+  <script>
+    window.onload = function () {
+      OpenBootstrapPopup();
+    };
+    function OpenBootstrapPopup() {
+      const myModal = new bootstrap.Modal(document.getElementById('messageModal'));
+      myModal.show();
+    }
+  </script>
+  {% endif %}
+
+  <!-- Showing form errors via modals -->
+  {% if form.errors %}
+  <div id="formErrorModal" class="modal" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+              </div>
+              <div class="modal-body">
+                  <h4>Please fix the following errors</h4>
+                  <ul>
+                      {% for field in form %}
+                      {% if field.errors %}
+                          {% for error in field.errors %}
+                          <li><a href="#id_{{ field.name }}" class="error">{{ error|escape }}</a></li>
+                          {% endfor %}
+                      {% endif %}
+                      {% endfor %}
+                  </ul>
+                  {% if form.non_field_errors %}
+                    {{ form.non_field_errors }}
+                  {% endif %}
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-info" data-dismiss="modal">OK!</button>
+              </div>
+          </div>
+      </div>
+  </div>
+  <script>
+      window.onload = function () {
+      OpenBootstrapPopup2();
+      };
+      function OpenBootstrapPopup2() {
+        const myModal2 = new bootstrap.Modal(document.getElementById('formErrorModal'));
+        myModal2.show();
+      }
+  </script>
+  {% endif %}
+
+  {% block content %}
+
+  {% endblock %}
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer">
+    <div class="footer-top">
+      <div class="container">
+        <div class="row">
+
+          <div class="col-lg-3 col-md-6 footer-info">
+            <h3>Serenity</h3>
+            <p>This is a website about peace and serenity. I hope you enjoy it!
+            </p>
+          </div>
+
+          <div class="col-lg-3 col-md-6 footer-links">
+            <h4>Useful Links</h4>
+            <ul>
+              <li><a href="/">Home</a></li>
+              <li><a href="{% url 'website:about' %}">About us</a></li>
+              <li><a href="{% url 'website:contact' %}">Contact</a></li>
+              <li><a href="{% url 'blog:index' %}">Blog</a></li>
+            </ul>
+          </div>
+
+          <div class="col-lg-3 col-md-6 footer-contact">
+            <h4>Contact Us</h4>
+            <p>
+              Tehran, Iran<br>
+              <strong>Phone:</strong> +98 9123456789<br>
+              <strong>Email:</strong> fathali.m1379@gmail.com<br>
+            </p>
+
+            <div class="social-links">
+              <a href="https://x.com/mohsen_7901" class="X"><i class="bi bi-twitter"></i></a>
+              <a href="https://www.linkedin.com/in/mohsen-fathali-071b1b260/" class="linkedin"><i class="bi bi-linkedin"></i></a>
+              <a href="https://github.com/mohsen7901" class="github"><i class="bi bi-github"></i></a>
+            </div>
+
+          </div>
+
+          <div class="col-lg-3 col-md-6 footer-newsletter">
+            <h4>Our Newsletter</h4>
+            <p>To get the latest news and blog posts from our website, subscribe to our newsletter.</p>
+            <form action="{% url 'website:index' %}" method="post">
+              {% csrf_token %}
+              <input type="email" name="email" required><input type="submit" value="Subscribe">
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="copyright">
+        &copy; Copyright <strong><span>Mohsen Fathali - 2024</span></strong>. All Rights Reserved
+      </div>
+      <div class="credits">
+        <!-- All the links in the footer should remain intact. -->
+        <!-- You can delete the links only if you purchased the pro version. -->
+        <!-- Licensing information: https://bootstrapmade.com/license/ -->
+        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/serenity-bootstrap-corporate-template/ -->
+        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+      </div>
+    </div>
+  </footer><!-- End Footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+      class="bi bi-arrow-up-short"></i></a>
+
+
+  <!-- Vendor JS Files -->
+  <script src="{% static 'vendor/purecounter/purecounter_vanilla.js' %}"></script>
+  <script src="{% static 'vendor/aos/aos.js' %}"></script>
+  <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'vendor/glightbox/js/glightbox.min.js' %}"></script>
+  <script src="{% static 'vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+  <script src="{% static 'vendor/swiper/swiper-bundle.min.js' %}"></script>
+  <script src="{% static 'vendor/waypoints/noframework.waypoints.js' %}"></script>
+  <script src="{% static 'vendor/php-email-form/validate.js' %}"></script>
+
+  <!-- Template Main JS File -->
+  <script src="{% static 'js/main.js' %}"></script>
+
+</body>
+
+</html>

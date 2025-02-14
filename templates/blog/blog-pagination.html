@@ -1,0 +1,16 @@
+<div class="blog-pagination">
+    <ul class="justify-content-center">
+        {% if posts.has_previous %}
+        <li><a href="?page=1">&laquo; First</a></li>
+        <li><a href="?page={{posts.previous_page_number}}">Prevoius</a></li>
+        {% endif %}
+
+        <li class="active"><a href="?page={{posts.number}}">Page {{posts.number}} of {{posts.paginator.num_pages}}</a>
+        </li>
+
+        {% if posts.has_next %}
+        <li><a href="?page={{posts.next_page_number}}">Next</a></li>
+        <li><a href="?page={{ posts.paginator.num_pages }}">Last &raquo;</a></li>
+        {% endif %}
+    </ul>
+</div>

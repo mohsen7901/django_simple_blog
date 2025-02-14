@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Serenity - About{% endblock %}
+{% block content %}
+<main id="main">
+
+  <!-- ======= Breadcrumbs ======= -->
+  <section id="breadcrumbs" class="breadcrumbs">
+    <div class="breadcrumb-hero">
+      <div class="container">
+        <div class="breadcrumb-hero">
+          <h2>About</h2>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <ol>
+        <li><a href="{% url 'website:index' %}">Home</a></li>
+        <li>About</li>
+      </ol>
+    </div>
+  </section><!-- End Breadcrumbs -->
+
+  <!-- ======= About Section ======= -->
+  <section id="about" class="about">
+    <div class="container">
+
+      <br>
+
+      <div class="row">
+
+        <div class="col-lg-6 video-box align-self-baseline position-relative">
+          <img src="{% static 'img/skills-img.jpg' %}" class="img-fluid" alt="skills-img.jpg">
+        </div>
+
+        <div class="col-lg-6 pt-3 pt-lg-0 content">
+          <h3>Welcome to Serenity</h3>
+          <p>
+            This is a website about peace and serenity. I hope you enjoy it!
+            Have fun!
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+  </section><!-- End About Section -->
+
+  <!-- ======= Our Skills Section ======= -->
+  <section id="skills" class="skills section-bg">
+    <div class="container">
+
+      <div class="section-title" data-aos="fade-up">
+        <h2>Our Skills</h2>
+        <p>Below are some of our major skills that was helped our clients.</p>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-6" data-aos="fade-right">
+          <img src="{% static 'img/features-4.jpg' %}" class="img-fluid" alt="features-4.jpg">
+        </div>
+        <div class="col-lg-6 pt-4 pt-lg-0 content" data-aos="fade-left">
+
+          <div class="skills-content">
+
+            <div class="progress">
+              <span class="skill">Python <i class="val">60%</i></span>
+              <div class="progress-bar-wrap">
+                <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">
+                </div>
+              </div>
+            </div>
+
+            <div class="progress">
+              <span class="skill">C <i class="val">50%</i></span>
+              <div class="progress-bar-wrap">
+                <div class="progress-bar" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
+                </div>
+              </div>
+            </div>
+
+            <div class="progress">
+              <span class="skill">C++ <i class="val">40%</i></span>
+              <div class="progress-bar-wrap">
+                <div class="progress-bar" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">
+                </div>
+              </div>
+            </div>
+
+            <div class="progress">
+              <span class="skill">HTML <i class="val">75%</i></span>
+              <div class="progress-bar-wrap">
+                <div class="progress-bar" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+                </div>
+              </div>
+            </div>
+
+            <div class="progress">
+              <span class="skill">Altium Desiner <i class="val">50%</i></span>
+              <div class="progress-bar-wrap">
+                <div class="progress-bar" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
+                </div>
+              </div>
+            </div>
+
+            <div class="progress">
+              <span class="skill">Embedded Programming <i class="val">55%</i></span>
+              <div class="progress-bar-wrap">
+                <div class="progress-bar" role="progressbar" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100">
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section><!-- End Our Skills Section -->
+
+</main><!-- End #main -->
+
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'accounts/base.html' %}
+{% load static %}
+{% block title %}Sign Up{% endblock %}
+{% block content %}
+
+<form class="form-signin" method="post" action="{% url 'accounts:signup' %}">
+    {% csrf_token %}
+    <a href="/"><img class="mb-4" src="{% static 'img/bootstrap-solid.svg' %}" alt="" width="72" height="72"></a>
+
+    <h1 class="h3 mb-3 font-weight-normal">Create your account</h1>
+
+    <label for="inputUsername" class="sr-only">Username</label>
+    <input type="text" name="username" id="inputUsername" class="form-control" placeholder="Username" required autofocus>
+    
+    <label for="inputEmail" class="sr-only">Email</label>
+    <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email" required>
+    
+    <label for="inputFirstname" class="sr-only">First Name</label>
+    <input type="text" name="first_name" id="inputFirstname" class="form-control" placeholder="First Name">
+    
+    <label for="inputLastname" class="sr-only">Last Name</label>
+    <input type="text" name="last_name" id="inputLastname" class="form-control" placeholder="Last Name">
+    
+    <label for="inputPassword1" class="sr-only">Password</label>
+    <input style="margin-bottom: 0px"   type="password" name="password1" id="inputPassword1" class="form-control" placeholder="Password" required>
+    
+    <label for="inputPassword2" class="sr-only">Confirm Password</label>
+    <input type="password" name="password2" id="inputPassword2" class="form-control" placeholder="Confirm Password" required>
+    
+    {{form.captcha}}
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
+
+    <p class="mt-5 mb-3 ">Already have an account? <a href="/accounts/login">
+        Sign in
+    </a></p>
+    <p class="mt-5 mb-3 text-muted">&copy; Mohsen Fathali - 2024</p>
+</form>
+
+{% endblock %}
