@@ -1,4 +1,4 @@
-# django_final_project
+# django simple blog
  This repository contains code for a simple django weblog app.
  To run this project locally do these steps:
  1. run "pip install -r requirements.txt" in a terminal opened in the project directory
